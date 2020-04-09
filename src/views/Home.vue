@@ -4,7 +4,7 @@
         <div class="container mt-5">
             <div class="row">
 
-                <div class="col-3">
+                <div class="col-md-3">
                     <HelloWorld msg="RedEye ~ Smart Video"/>
                 </div>
 
