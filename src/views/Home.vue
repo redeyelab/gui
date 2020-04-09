@@ -3,13 +3,17 @@
         <Navbar />
         <div class="container mt-5">
             <div class="row">
+
                 <div class="col-3">
-                    <HelloWorld msg="RedEye Computer Vision Network"/>
+                    <HelloWorld msg="RedEye ~ Smart Video"/>
                 </div>
+
                 <div class="col">
                     <VideoPlayer camera="http://10.24.10.10:8887/mjpeg" />
                 </div>
+
             </div> <!-- row -->
+
         </div> <!-- container -->
     </div>
 </template>
