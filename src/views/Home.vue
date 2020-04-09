@@ -1,9 +1,16 @@
 <template>
-    <div class="home">
+    <div>
         <Navbar />
-        <img alt="Vue logo" src="../assets/redeye-small.png">
-        <HelloWorld msg="RedEye Computer Vision Network"/>
-        <VideoPlayer camera="http://10.24.10.10:8887/mjpeg" />
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-3">
+                    <HelloWorld msg="RedEye Computer Vision Network"/>
+                </div>
+                <div class="col">
+                    <VideoPlayer camera="http://10.24.10.10:8887/mjpeg" />
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
     </div>
 </template>
 
@@ -11,10 +18,12 @@
  // @ is an alias to /src
  import HelloWorld from '@/components/HelloWorld.vue'
  import VideoPlayer from '@/components/VideoPlayer.vue'
+ import Navbar from '@/components/Navbar.vue'
 
  export default {
      name: 'Home',
      components: {
+         Navbar,
          HelloWorld,
          VideoPlayer
      }

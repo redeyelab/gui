@@ -1,9 +1,6 @@
 <template>
     <div class="hello">
         <h1>{{ msg }}</h1>
-        <p>
-            Computer Vision Network with commodity IP streaming cameras.
-        </p>
     </div>
 </template>
 
