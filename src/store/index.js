@@ -8,10 +8,10 @@ export default new Vuex.Store({
         status: 'confused'
     },
     mutations: {
-        play (state) {
+        setPlayState (state) {
             state.status = 'Playing'
         },
-        pause (state) {
+        setPauseState (state) {
             state.status = 'Paused'
         }
     },
