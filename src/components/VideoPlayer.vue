@@ -11,7 +11,13 @@
  export default {
      name: 'RedEye',
      props: {
+         state: String,
          message: String
+     },
+     data() {
+         return {
+             status: this.state
+         }
      },
      methods: {
          play() {
@@ -20,6 +26,7 @@
                  l: 1,
                  v: "play"
              }
+             // ws.send(JSON.stringify(sendmsg));
              console.log(sendmsg);
          },
          pause() {
@@ -28,8 +35,8 @@
                  l: 1,
                  v: "pause"
              }
-             console.log(sendmsg);
              // ws.send(JSON.stringify(sendmsg));
+             console.log(sendmsg);
          }
      }
  }
