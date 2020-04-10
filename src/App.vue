@@ -1,8 +1,20 @@
 <template>
     <div id="app">
+        <Navbar />
         <router-view/>
     </div>
 </template>
+
+<script>
+ import Navbar from './components/Navbar.vue'
+
+ export default {
+     name: 'RedEye',
+     components: {
+         Navbar
+     }
+ }
+</script>
 
 <style lang="scss">
  #app {
@@ -11,7 +23,7 @@
      -moz-osx-font-smoothing: grayscale;
  }
 
- #nav {
+  #nav {
      padding: 20px;
      a {
          color: #333;

@@ -5,9 +5,10 @@
         <button v-on:click="pause" id="pause" type="button" class="btn btn-secondary btn-lg btn-block">Pause</button>
     </div>
 </template>
+
 <script>
  module.exports = {
-     
+     props: ['websocket'],
      methods: {
          play: function() {
              var sendmsg = {
@@ -30,11 +31,9 @@
      }
  };     
 </script>
-<style>
 
+<style>
  #video {
      border: 3px solid #333;
  }
-
-
 </style>
