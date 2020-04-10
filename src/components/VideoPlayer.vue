@@ -7,19 +7,22 @@
 </template>
 
 <script>
- module.exports = {
-     props: ['websocket'],
+
+ export default {
+     name: 'RedEye',
+     props: {
+         message: String
+     },
      methods: {
-         play: function() {
+         play() {
              var sendmsg = {
                  t: "video",
                  l: 1,
                  v: "play"
              }
              console.log(sendmsg);
-             // ws.send(JSON.stringify(sendmsg));
          },
-         pause: function() {
+         pause() {
              var sendmsg = {
                  t: "video",
                  l: 1,
@@ -29,7 +32,7 @@
              // ws.send(JSON.stringify(sendmsg));
          }
      }
- };     
+ }
 </script>
 
 <style>
