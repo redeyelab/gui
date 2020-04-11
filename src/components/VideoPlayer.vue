@@ -66,6 +66,8 @@
              playerColor: "bg-success",
              lastSnapshot: new Date().toLocaleString(),
              activePipelineId: 1,
+             config: '',
+             response: '',
              pipelines: [
                  { id: 0, name: 'Raw' },
                  { id: 1, name: 'Face Detect' },
@@ -84,9 +86,10 @@
          // Fetch info from the camera for display in the status pane
          axios
              .get("http://localhost:8888/api/config")
-             .then(response => (this.info = response))
+             .then(response => (this.config = response))
 
-         console.log("I have been mounted!")         
+         console.log("I have been mounted!")
+         console.log(this.config)
      },
      updated() {
          console.log("I have been updated!")         
@@ -108,8 +111,14 @@
              }
              this.playerStatus = "Playing"
              this.playerColor = "bg-success"
+             // Fetch info from the camera for display in the status pane
+             axios
+                 .get("http://localhost:8888/api/camera/play")
+                 .then(response => (this.response = response))
+
              // ws.send(JSON.stringify(sendmsg));
              //store.commit('play')
+             console.log(this.response)
              console.log(sendmsg)
          },
          pause() {
@@ -122,6 +131,11 @@
              //store.commit('pause')
              this.playerColor = "bg-secondary"
              this.playerStatus = "Paused"
+             axios
+                 .get("http://localhost:8888/api/camera/pause")
+                 .then(response => (this.response = response))
+
+             console.log(this.response)
              console.log(sendmsg);
          },
          snap() {
