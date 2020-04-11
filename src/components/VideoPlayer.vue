@@ -3,8 +3,10 @@
         <div class="container-fluid mt-5">
 
             <div class="row">
-                <!-- sidebar -->
+                <!-- ====================== ------ Sidebar ------ ========================= -->
                 <div class="col-md-4">
+
+                    <!-- ====================  Status  ======================== -->
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="card-text">
@@ -13,13 +15,14 @@
                         </div>
                     </div>
 
+                    <!-- ==================== A/I List ======================== -->
                     <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Pipelines</h5>
-                            <div class="card-text">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item" v-for="pipeline in pipelines" :key="pipeline.name">
-                                        {{ pipeline.name }}
+                    <div class="card-body">
+                    <h5 class="card-title">Pipelines</h5>
+                    <div class="card-text">
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item" v-for="pipeline in pipelines" :key="pipeline.name">
+                    {{ pipeline.name }}
                                     </li>
                                 </ul>
 
@@ -30,8 +33,9 @@
                     <!-- ==================== Thumbnail ======================== -->
                     <div class="card">
                         <div class="card-body">
-                        <h5 class="card-title">Thumbnail</h5>
-                        <img width="100%" class="card-image-top" src="../assets/redeye-thumbnail.png" />
+                            <h5 class="card-title">Thumbnail</h5>
+                            <img width="100%" class="card-image-top" src="../assets/redeye-thumbnail.png" />
+                            <p class="card-text">last Snapshot: {{ lastSnapshot }}</p>
                         </div>
                     </div>
 
@@ -58,6 +62,7 @@
          return {
              playerStatus: "Playing",
              activePipeline: "Face Detect",
+             lastSnapshot: new Date().toLocaleString(),
              pipelines: [
                  { name: 'Raw' },
                  { name: 'Face Detect' },
@@ -77,6 +82,7 @@
                  l: 1,
                  v: "play"
              }
+             this.playerStatus = "Playing"
              // ws.send(JSON.stringify(sendmsg));
              //store.commit('play')
              console.log(sendmsg)
@@ -89,6 +95,7 @@
              }
              // ws.send(JSON.stringify(sendmsg));
              //store.commit('pause')
+             this.playerStatus = "Paused"
              console.log(sendmsg);
          },
          snap() {
@@ -100,7 +107,7 @@
              // ws.send(JSON.stringify(sendmsg));
              //store.commit('pause')
              console.log(sendmsg);
-
+             this.lastSnapshot = new Date().toLocaleString()
          }
      }
  }
