@@ -58,16 +58,30 @@
 <script>
  export default {
      name: 'RedEye',
+     created() {
+         // TODO Query the camera to determine its state
+         // TODO If a thumbnail does not exist, find one.
+         console.log("I have been created!")
+     },
+     mounted() {
+         console.log("I have been mounted!")         
+     },
+     updated() {
+         console.log("I have been updated!")         
+     },
+     destroyed() {
+         console.log("I am being destroyed!")         
+     },
      data() {
          return {
              playerStatus: "Playing",
              playerColor: "bg-success",
-             activePipeline: "Face Detect",
              lastSnapshot: new Date().toLocaleString(),
+             activePipelineId: 1,
              pipelines: [
-                 { name: 'Raw' },
-                 { name: 'Face Detect' },
-                 { name: 'Motion Detect' }
+                 { id: 0, name: 'Raw' },
+                 { id: 1, name: 'Face Detect' },
+                 { id: 2, name: 'Motion Detect' }
              ]
          }
      },
