@@ -56,24 +56,12 @@
 </template>
 
 <script>
+ import axios from 'axios';
  export default {
-     name: 'RedEye',
-     created() {
-         // TODO Query the camera to determine its state
-         // TODO If a thumbnail does not exist, find one.
-         console.log("I have been created!")
-     },
-     mounted() {
-         console.log("I have been mounted!")         
-     },
-     updated() {
-         console.log("I have been updated!")         
-     },
-     destroyed() {
-         console.log("I am being destroyed!")         
-     },
+     name: 'VideoPlayer',
      data() {
          return {
+             playerAddress: "localhost:8888",
              playerStatus: "Playing",
              playerColor: "bg-success",
              lastSnapshot: new Date().toLocaleString(),
@@ -84,6 +72,27 @@
                  { id: 2, name: 'Motion Detect' }
              ]
          }
+     },
+
+     created() {
+         // TODO Query the camera to determine its state
+         // TODO If a thumbnail does not exist, find one.
+         console.log("I have been created!")
+     },
+     mounted() {
+
+         // Fetch info from the camera for display in the status pane
+         axios
+             .get("http://localhost:8888/api/config")
+             .then(response => (this.info = response))
+
+         console.log("I have been mounted!")         
+     },
+     updated() {
+         console.log("I have been updated!")         
+     },
+     destroyed() {
+         console.log("I am being destroyed!")         
      },
      computed: {
          playStatus() {
