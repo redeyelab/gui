@@ -10,19 +10,19 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="card-text">
-                                <h4 class="bg-info p-4 text-center">{{ playerStatus }}</h4>
+                                <h4 class="p-4 text-center" :class="playerColor">{{ playerStatus }}</h4>
                             </div>
                         </div>
                     </div>
 
                     <!-- ==================== A/I List ======================== -->
                     <div class="card mb-4">
-                    <div class="card-body">
-                    <h5 class="card-title">Pipelines</h5>
-                    <div class="card-text">
-                    <ul class="list-group list-group-flush">
-                    <li class="list-group-item" v-for="pipeline in pipelines" :key="pipeline.name">
-                    {{ pipeline.name }}
+                        <div class="card-body">
+                            <h5 class="card-title">Pipelines</h5>
+                            <div class="card-text">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" v-for="pipeline in pipelines" :key="pipeline.name">
+                                        {{ pipeline.name }}
                                     </li>
                                 </ul>
 
@@ -44,9 +44,9 @@
                 <!-- ==================== Video Player and Buttons ======================== -->
                 <div class="col">
                     <img width="100%" id="video" class="video mb-4" src="http://10.24.10.10:8887/mjpeg" alt="streaming video" />
-                    <button v-on:click="play" id="play" type="button" class="btn btn-primary btn-lg btn-block">Play</button>
+                    <button v-on:click="play" id="play" type="button" class="btn btn-success btn-lg btn-block">Play</button>
                     <button v-on:click="pause" id="pause" type="button" class="btn btn-secondary btn-lg btn-block">Pause</button>
-                    <button v-on:click="snap" id="snap" type="button" class="btn btn-success btn-lg btn-block">Snapshot</button>
+                    <button v-on:click="snap" id="snap" type="button" class="btn btn-info btn-lg btn-block">Snapshot</button>
                 </div>
 
             </div> <!-- row -->
@@ -61,6 +61,7 @@
      data() {
          return {
              playerStatus: "Playing",
+             playerColor: "bg-success",
              activePipeline: "Face Detect",
              lastSnapshot: new Date().toLocaleString(),
              pipelines: [
@@ -83,6 +84,7 @@
                  v: "play"
              }
              this.playerStatus = "Playing"
+             this.playerColor = "bg-success"
              // ws.send(JSON.stringify(sendmsg));
              //store.commit('play')
              console.log(sendmsg)
@@ -95,6 +97,7 @@
              }
              // ws.send(JSON.stringify(sendmsg));
              //store.commit('pause')
+             this.playerColor = "bg-secondary"
              this.playerStatus = "Paused"
              console.log(sendmsg);
          },
