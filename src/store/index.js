@@ -5,19 +5,27 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        status: 'confused'
+        playerState: 'unknown',
     },
     mutations: {
-        setPlayState (state) {
-            state.status = 'Playing'
+
+        play (state) {
+            state.playerState = 'Playing'
         },
-        setPauseState (state) {
-            state.status = 'Paused'
+
+        pause (state) {
+            state.playerState = 'Paused'
         }
     },
+
     actions: {
         play: ({ commit }) => commit('play'),
         pause: ({ commit }) => commit('pause'),
+    },
+    getters: {
+        playerStatus: state => {
+            return state.playerState
+        }
     },
     modules: {
     }

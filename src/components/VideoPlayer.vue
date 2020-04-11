@@ -1,13 +1,14 @@
 <template>
     <div id="video-player">
         <div class="container-fluid mt-5">
+
             <div class="row">
+                <!-- sidebar -->
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">Status</h5>
                             <div class="card-text">
-                                <p class="bg-success p-4">Status: {{ playStatus }}</p>
+                                <h4 class="bg-info p-4 text-center">{{ playerStatus }}</h4>
                             </div>
                         </div>
                     </div>
@@ -16,8 +17,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Pipelines</h5>
                             <div class="card-text">
-                                <ul>
-                                    <li v-for="pipeline in pipelines" :key="pipeline.name">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" v-for="pipeline in pipelines" :key="pipeline.name">
                                         {{ pipeline.name }}
                                     </li>
                                 </ul>
@@ -26,21 +27,22 @@
                         </div>
                     </div>
 
+                    <!-- ==================== Thumbnail ======================== -->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Thumbnail</h5>
-
-                            <img width="100%" class="card-image-top" src="http://localhost:1313/img/redeye-screen-600.png" />
+                        <h5 class="card-title">Thumbnail</h5>
+                        <img width="100%" class="card-image-top" src="../assets/redeye-thumbnail.png" />
                         </div>
                     </div>
 
-
                 </div>
 
+                <!-- ==================== Video Player and Buttons ======================== -->
                 <div class="col">
                     <img width="100%" id="video" class="video mb-4" src="http://10.24.10.10:8887/mjpeg" alt="streaming video" />
                     <button v-on:click="play" id="play" type="button" class="btn btn-primary btn-lg btn-block">Play</button>
                     <button v-on:click="pause" id="pause" type="button" class="btn btn-secondary btn-lg btn-block">Pause</button>
+                    <button v-on:click="snap" id="snap" type="button" class="btn btn-success btn-lg btn-block">Snapshot</button>
                 </div>
 
             </div> <!-- row -->
@@ -50,22 +52,22 @@
 </template>
 
 <script>
-
  export default {
      name: 'RedEye',
-     props: {
-         playState: String,
-         message: String,
-         image: String
-     },
      data() {
          return {
-             playStatus: "Playing",
+             playerStatus: "Playing",
+             activePipeline: "Face Detect",
              pipelines: [
                  { name: 'Raw' },
                  { name: 'Face Detect' },
                  { name: 'Motion Detect' }
              ]
+         }
+     },
+     computed: {
+         playStatus() {
+             return this.$store.state.playStatus
          }
      },
      methods: {
@@ -76,7 +78,8 @@
                  v: "play"
              }
              // ws.send(JSON.stringify(sendmsg));
-             console.log(sendmsg);
+             //store.commit('play')
+             console.log(sendmsg)
          },
          pause() {
              var sendmsg = {
@@ -85,9 +88,21 @@
                  v: "pause"
              }
              // ws.send(JSON.stringify(sendmsg));
+             //store.commit('pause')
              console.log(sendmsg);
+         },
+         snap() {
+             var sendmsg = {
+                 t: "video",
+                 l: 1,
+                 v: "snap"
+             }
+             // ws.send(JSON.stringify(sendmsg));
+             //store.commit('pause')
+             console.log(sendmsg);
+
          }
-     },
+     }
  }
 </script>
 
