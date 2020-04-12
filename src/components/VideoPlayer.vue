@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-body">
                         <h5 class="card-title">Thumbnail</h5>
-                        <img width="100%" class="card-image-top" src="../assets/redeye-thumbnail.png" />
+                        <img width="100%" class="card-image-top" src="/img/thumbnail.jpg" />
                         <p class="card-text">last Snapshot: {{ lastSnapshot }}</p>
                         </div>
                     </div>
