@@ -10,7 +10,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="card-text">
-                                <h4 class="p-4 text-center" :class="playerColor">{{ playerStatus }}</h4>
+                                <h4 class="p-4 text-center" :class="color">{{ status }}</h4>
                             </div>
                         </div>
                     </div>
@@ -33,16 +33,16 @@
                     <!-- ==================== Thumbnail ======================== -->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Thumbnail</h5>
-                            <img width="100%" class="card-image-top" src="../assets/redeye-thumbnail.png" />
-                            <p class="card-text">last Snapshot: {{ lastSnapshot }}</p>
+                        <h5 class="card-title">Thumbnail</h5>
+                        <img width="100%" class="card-image-top" src="../assets/redeye-thumbnail.png" />
+                        <p class="card-text">last Snapshot: {{ lastSnapshot }}</p>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- ==================== Video Player and Buttons ======================== -->
-                <div class="col">
+                <div class="col mb-4" height="100%">
                     <img width="100%" id="video" class="video mb-4" src="http://10.24.10.10:8887/mjpeg" alt="streaming video" />
                     <button v-on:click="play" id="play" type="button" class="btn btn-success btn-lg btn-block">Play</button>
                     <button v-on:click="pause" id="pause" type="button" class="btn btn-secondary btn-lg btn-block">Pause</button>
@@ -61,12 +61,12 @@
      name: 'VideoPlayer',
      data() {
          return {
-             playerAddress: "localhost:8888",
-             playerStatus: "Playing",
-             playerColor: "bg-success",
+             status: 'paused',
+             color: 'bg-secondary',
+             playerStatus: '',
              lastSnapshot: new Date().toLocaleString(),
              activePipelineId: 1,
-             config: '',
+             config: '', // this will be set during 'mounted()'
              response: '',
              pipelines: [
                  { id: 0, name: 'Raw' },
@@ -85,8 +85,8 @@
 
          // Fetch info from the camera for display in the status pane
          axios
-             .get("http://localhost:8888/api/config")
-             .then(response => (this.config = response))
+             .get("http://localhost:8888/api/camera/status")
+             .then(response => (this.playerStatus = response.data))
 
          console.log("I have been mounted!")
          console.log(this.config)
@@ -109,8 +109,8 @@
                  l: 1,
                  v: "play"
              }
-             this.playerStatus = "Playing"
-             this.playerColor = "bg-success"
+             this.status = "Playing"
+             this.color = "bg-success"
              // Fetch info from the camera for display in the status pane
              axios
                  .get("http://localhost:8888/api/camera/play")
@@ -129,8 +129,8 @@
              }
              // ws.send(JSON.stringify(sendmsg));
              //store.commit('pause')
-             this.playerColor = "bg-secondary"
-             this.playerStatus = "Paused"
+             this.color = "bg-secondary"
+             this.status = "Paused"
              axios
                  .get("http://localhost:8888/api/camera/pause")
                  .then(response => (this.response = response))
