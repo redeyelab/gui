@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-body">
                         <h5 class="card-title">Thumbnail</h5>
-                        <img width="100%" class="card-image-top" src="/img/thumbnail.jpg" />
+                        <img width="100%" class="card-image-top" src="../assets/snapshot.jpg" />
                         <p class="card-text">last Snapshot: {{ lastSnapshot }}</p>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
 
                 <!-- ==================== Video Player and Buttons ======================== -->
                 <div class="col mb-4" height="100%">
-                    <img width="100%" id="video" class="video mb-4" src="http://10.24.10.10:8887/mjpeg" alt="streaming video" />
+                    <img width="100%" id="video" class="video mb-4" :src="videoaddr" alt="streaming video" />
                     <button v-on:click="play" id="play" type="button" class="btn btn-success btn-lg btn-block">Play</button>
                     <button v-on:click="pause" id="pause" type="button" class="btn btn-secondary btn-lg btn-block">Pause</button>
                     <button v-on:click="snap" id="snap" type="button" class="btn btn-info btn-lg btn-block">Snapshot</button>
@@ -61,6 +61,7 @@
      name: 'VideoPlayer',
      data() {
          return {
+             videoaddr: '',
              status: 'paused',
              color: 'bg-secondary',
              playerStatus: '',
@@ -88,6 +89,9 @@
              .get("http://localhost:8888/api/camera/status")
              .then(response => (this.playerStatus = response.data))
 
+         // src="http://{{videoaddr}}:8887/mjpeg"
+         // location.host + ":8887/mjpeg"
+         this.videoaddr = "http://" + location.hostname + ":8887/mjpeg"
          console.log("I have been mounted!")
          console.log(this.config)
      },
